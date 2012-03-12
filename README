@@ -1,0 +1,19 @@
+This code is based on the "A more complex Ajax example" from section 11.3 of 
+"Exploring Lift". It's pretty much the same except I've used CSS selector 
+transforms in the render method rather than the bind method.
+
+It seems to give an exception when compiling:
+
+[error] C:\exploring-lift-exception\src\main\scala\code\snippet\Ajax.scala:37: overloaded method constructor UnprefixedAttribute with alternatives:
+[error]   (key: String,value: Option[Seq[scala.xml.Node]],next: scala.xml.MetaData)scala.xml.UnprefixedAttribute <and>
+[error]   (key: String,value: String,next: scala.xml.MetaData)scala.xml.UnprefixedAttribute <and>
+[error]   (key: String,value: Seq[scala.xml.Node],next1: scala.xml.MetaData)scala.xml.UnprefixedAttribute
+[error]  cannot be applied to (java.lang.String, net.liftweb.http.js.JsExp, scala.xml.MetaData)
+[error]               <button onclick={SHtml.ajaxCall(Str("Button-2"), ajaxFunc2 _)._2}>Press me 2</button> &
+[error]                ^
+[error] one error found
+
+I thought this error could be fixed by calling toJsCmd on the JsExp to convert it to a String. The
+code does then compile, but I don't see a javascript alert box when clicking button 2 or 3.
+Button 1 seems to work fine and I see the javascript alert box.
+
